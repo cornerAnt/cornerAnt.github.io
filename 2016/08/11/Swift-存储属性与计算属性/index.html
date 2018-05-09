@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Swift-存储属性与计算属性 | Cornerant Zone</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Swift," />
+  
+
+  <meta name="description" content="属性是将值跟特定的类、结构体或者枚举关联。存储属性存储常量或者变量作为实例的一部分，用于类和结构体；计算属性是用来计算一个值，可以用在类、结构体和枚举。 存储属性和计算属性通常与特定的类型的实例关联。但是，属性也可以直接作用于类型本身，这样的属性成为类型属性。 Swift可以定义属性观察器来监控属性值的改变，属性观察期可以添加到自己定义的存储属性上，也可以添加到父类继承的属性上  ##1.存储属">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-存储属性与计算属性">
+<meta property="og:url" content="http://www.antjustgo.com/2016/08/11/Swift-存储属性与计算属性/index.html">
+<meta property="og:site_name" content="Cornerant Zone">
+<meta property="og:description" content="属性是将值跟特定的类、结构体或者枚举关联。存储属性存储常量或者变量作为实例的一部分，用于类和结构体；计算属性是用来计算一个值，可以用在类、结构体和枚举。 存储属性和计算属性通常与特定的类型的实例关联。但是，属性也可以直接作用于类型本身，这样的属性成为类型属性。 Swift可以定义属性观察器来监控属性值的改变，属性观察期可以添加到自己定义的存储属性上，也可以添加到父类继承的属性上  ##1.存储属">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-09T07:08:58.941Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-存储属性与计算属性">
+<meta name="twitter:description" content="属性是将值跟特定的类、结构体或者枚举关联。存储属性存储常量或者变量作为实例的一部分，用于类和结构体；计算属性是用来计算一个值，可以用在类、结构体和枚举。 存储属性和计算属性通常与特定的类型的实例关联。但是，属性也可以直接作用于类型本身，这样的属性成为类型属性。 Swift可以定义属性观察器来监控属性值的改变，属性观察期可以添加到自己定义的存储属性上，也可以添加到父类继承的属性上  ##1.存储属">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Swift-存储属性与计算属性" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Swift-存储属性与计算属性</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.08.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>cornerant</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <ul>
+<li>属性是将值跟特定的类、结构体或者枚举关联。存储属性存储常量或者变量作为实例的一部分，用于类和结构体；计算属性是用来计算一个值，可以用在类、结构体和枚举。</li>
+<li>存储属性和计算属性通常与特定的类型的实例关联。但是，属性也可以直接作用于类型本身，这样的属性成为类型属性。</li>
+<li>Swift可以定义属性观察器来监控属性值的改变，属性观察期可以添加到自己定义的存储属性上，也可以添加到父类继承的属性上</li>
+</ul>
+<p>##1.存储属性</p>
+<ul>
+<li>存储属性就是存储在特定类、结构体里的一个常量或者变量。</li>
+<li>可以在定义存储属性的时候指定默认值。</li>
+<li>可以在构造过程中设置或者修改存储属性的值。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个结构体如下，FixedLengthRange代表一个创建后无法改变的区间</span><br><span class="line">struct FixedLengthRange &#123;</span><br><span class="line">    var firstValue: Int</span><br><span class="line">    let lenght: Int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var rangeOfThreeItens = FixedLengthRange(firstValue: 0, lenght: 3)</span><br><span class="line"></span><br><span class="line">// rangeOfThreeItens 实例包括了名为firstValue的变量存储属性和lenght的常量存储属性</span><br><span class="line">// 其中lenght在创建后无法被修改</span><br><span class="line"></span><br><span class="line">rangeOfThreeItens.firstValue = 7;</span><br><span class="line"></span><br><span class="line">// rangeOfThreeItens 现在的表示7 8 9的区间</span><br></pre></td></tr></table></figure>
+<p>####1.1 常量结构体的存储属性</p>
+<ul>
+<li>当创建了一个结构体的实例并赋值一个常量，那么无法修改该实例的任何属性。</li>
+<li>结构体是值类型，当值类型的实例被声明为常量的时候，它的所有属性都变成了常量。<br>当尝试下面的修改时，就会报错<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> rangeOfThreeItens = <span class="type">FixedLengthRange</span>(firstValue: <span class="number">0</span>, lenght: <span class="number">3</span>)</span><br><span class="line">rangeOfThreeItens.firstValue = <span class="number">8</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>####1.2延迟存储属性</p>
+<ul>
+<li>延迟存储属性是指第一次被调用的时候才会计算其初始值的属性，就是常说的懒加载。</li>
+<li>Swift在属性前加lazy关键字来标记一个延迟存储属性，延迟存储属性必须用变量（var关键字）。</li>
+<li>当属性依赖其他外部因素影响（如构造过程，初始值复杂，大量计算），适合用延迟属性。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// DataImporter是一个导入数据的类，导入过程会消耗大量的时间</span><br><span class="line">class DataImporter &#123;</span><br><span class="line">    </span><br><span class="line">    var fileName = &quot;data.text&quot;</span><br><span class="line">    /** 导入数据 **/</span><br><span class="line">&#125;</span><br><span class="line">// DataManager用来管理和提供对这个字符串数组的访问</span><br><span class="line"></span><br><span class="line">class DataManager &#123;</span><br><span class="line">    </span><br><span class="line">    lazy var importer = DataImporter()</span><br><span class="line">    var data = [String]()</span><br><span class="line">    /** 管理数据 **/</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let manager = DataManager()</span><br><span class="line"></span><br><span class="line">manager.data.append(&quot;someData&quot;)</span><br><span class="line">manager.data.append(&quot;someMore&quot;)</span><br></pre></td></tr></table></figure>
+<p>简单描述了一个DataManager类，导入文件的过程。DataManager用来管理数据的导入，依赖与DataImporter的功能。导入数据消耗太多的时间，而且DataManager也可能不导入数据就完成了管理数据的过程。DataImporter不需要立刻创建，只有在使用的时候才去创建。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(manager.importer.fileName)</span><br></pre></td></tr></table></figure>
+<p>只有执行上述代码的时候，DataImporter实例才会被创建。</p>
+<p>####1.3存储属性和实例变量</p>
+<ul>
+<li>OC中，提供了为类实例存储值和引用提供了两种方法，通过_XXXXX或者self.XXXXX.</li>
+<li>Swift统一了OC的方法，属性没有对应的实例变量（_XXXXX)</li>
+<li>一个类型中属性的全部信息–命名、类型、内存管理特性，全部都在唯一的地方（类型定义中）</li>
+</ul>
+<p>##2.计算属性</p>
+<ul>
+<li>枚举、类、结构体除了拥有存储属性，还可以定义计算属性。</li>
+<li>计算属性不直接存储值，而是提供一个getter和一个可选的setter来间接获取、设置其他属性和变量的值。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// 下面定义三个结构体，来描述一个矩形</span><br><span class="line">struct Point &#123;</span><br><span class="line">    var x = 0.0, y = 0.0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Size &#123;</span><br><span class="line">    var width = 0.0, height = 0.0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Rect &#123;</span><br><span class="line">    var origin = Point()</span><br><span class="line">    var size = Size()</span><br><span class="line">    var center: Point&#123;</span><br><span class="line">        get&#123;</span><br><span class="line">            let centerX = origin.x + (size.width * 0.5)</span><br><span class="line">            let centerY = origin.y + (size.height * 0.5)</span><br><span class="line">            return Point(x: centerX, y: centerY)</span><br><span class="line">        &#125;</span><br><span class="line">        set(newCenter)&#123;</span><br><span class="line">            origin.x = newCenter.x - (size.width * 0.5)</span><br><span class="line">            origin.y = newCenter.y - (size.height * 0.5)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 创建一个矩形</span><br><span class="line">var square = Rect(origin: Point(x: 0.0, y: 0.0), size: Size(width: 10.0, height: 10.0))</span><br><span class="line">// 重新设置矩形的中心点</span><br><span class="line">let initialSquareCenter = square.center;</span><br><span class="line">square.center = Point(x: 20.0, y: 20.0)</span><br></pre></td></tr></table></figure>
+<p>####2.1便捷setter声明</p>
+<ul>
+<li>如果计算属性的setter没有定义表示新值的参数名，则可以用默认值newValue,上述代码可以改写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">struct Rect &#123;</span><br><span class="line">    var origin = Point()</span><br><span class="line">    var size = Size()</span><br><span class="line">    var center: Point&#123;</span><br><span class="line">        get&#123;</span><br><span class="line">            let centerX = origin.x + (size.width * 0.5)</span><br><span class="line">            let centerY = origin.y + (size.height * 0.5)</span><br><span class="line">            return Point(x: centerX, y: centerY)</span><br><span class="line">        &#125;</span><br><span class="line">        set&#123;</span><br><span class="line">            origin.x = newValue.x - (size.width * 0.5)</span><br><span class="line">            origin.y = newValue.y - (size.height * 0.5)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>####2.2只读计算属性</p>
+<ul>
+<li>只有getter没有setter的计算属性</li>
+<li>只读计算属性总是返回一个值，可以通过点语法访问，但是不能设置</li>
+<li>只读计算属性可以省略get和花括号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 一个结构体 ，volume计算体积</span><br><span class="line">struct Cuboid&#123;</span><br><span class="line">    var width = 0.0, height = 0.0, depth = 0.0</span><br><span class="line">    var volume: Double&#123;</span><br><span class="line">        return width * height * depth</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let newCuboid = Cuboid(width: 3.0, height: 4.0, depth: 5.0)</span><br></pre></td></tr></table></figure>
+<p>##3.属性观察器</p>
+<ul>
+<li>属性观察器监控和响应属性值的变化，每次属性被设置值的时候都会调用。</li>
+<li>延迟属性不可以设置属性观察器</li>
+<li>可以通过重写属性的方式为继承的属性添加观察器<ul>
+<li>willSet : 在新的值被设置之前调用 </li>
+<li>didSet : 在新的值被设置之后调用</li>
+<li>父类的属性在子类的构造器被赋值时，观察器同样会被触发</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// StepCounter是一个计步器</span><br><span class="line">class StepCounter&#123;</span><br><span class="line">    var totalStep: Int = 0&#123;</span><br><span class="line">        willSet(newTotalSteps)&#123;</span><br><span class="line">            print(&quot;现在总步数是\(newTotalSteps)步&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        didSet&#123;</span><br><span class="line">            if totalStep &gt; oldValue&#123;</span><br><span class="line">                print(&quot;增加了\(totalStep - oldValue)步&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let stepCounter = StepCounter()</span><br><span class="line">stepCounter.totalStep = 200;</span><br><span class="line">// 现在总步数是200,增加了200步</span><br><span class="line">stepCounter.totalStep = 500;</span><br><span class="line">// 现在总步数是500,增加了300步</span><br></pre></td></tr></table></figure>
+<p>##4.全局变量和局部变量<br>全局变量是在函数、方法、闭包或者其他类型之外定义的变量。局部变量是在函数、方法、或者闭包内定义的。</p>
+<ul>
+<li>计算属性和属性观察器所描述的模式也可以用于全局变量和局部变量。</li>
+<li>默认的全局和局部变量都是存储型变量，跟存储属性类似，它提供存储空间，并且允许读取和写入</li>
+<li>全局和局部变量都可以定义计算属性和添加属性观察器。</li>
+<li>注意！！<ul>
+<li>全局的常量或者变量都是延迟计算的，跟延迟存储属性不同的地方在于，全局的常量或者变量不需要标记lazy。</li>
+<li>局部范围的常量或者变量不会延迟计算。</li>
+</ul>
+</li>
+</ul>
+<p>##5.类型属性<br>实例的属性属于一个特定的实例，实例之间的属性相互独立，也可以为类型本身设置属性，不管类有多少的实例，这些属性只有唯一一份，这个就是类型属性。</p>
+<ul>
+<li>类型属性，比如所有实例都有一个常量（类似C语言的静态常量），或者拥有一个变量（类似C语言的动态变量）。</li>
+<li>值类型的存储类型属性可以是变量或者常量，计算型属性跟计算属性一样只能定义成常量属性。</li>
+<li>注意！！<ul>
+<li>必须给存储型类型属性，指定一个默认值，因为类型本身，无法在初始化过程中，使用构造器给类型属性赋值、</li>
+<li>存储型类型属性是延迟初始化的，并且不要加lazy,多线程同时访问也只会初始化一次。</li>
+</ul>
+</li>
+</ul>
+<p>####5.1类型属性语法<br>在Swift中，类型属性是类型定义的一部分，写在类型最外层花括号内，作用域就是在该类型支持的范围内。</p>
+<ul>
+<li>用关键字static来定义类型属性</li>
+<li>在类中，用关键字class来支持子类对父类的实现进行重写。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 只写了只读计算型类型属性</span><br><span class="line">struct MyStruct&#123;</span><br><span class="line"></span><br><span class="line">    static var storedTypeProperty = &quot;Some Value&quot;</span><br><span class="line">    </span><br><span class="line">    static var comutedTypeProperty : Int&#123;</span><br><span class="line">        return 998</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">enum MyEnum&#123;</span><br><span class="line">    static var storedTypeProperty = &quot;Some Value&quot;</span><br><span class="line">    </span><br><span class="line">    static var comutedTypeProperty : Int&#123;</span><br><span class="line">        return 998</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">class MyClass &#123;</span><br><span class="line">    static var storedTypeProperty = &quot;Some Value&quot;</span><br><span class="line">    </span><br><span class="line">    static var comutedTypeProperty : Int&#123;</span><br><span class="line">        return 998</span><br><span class="line">    &#125;</span><br><span class="line">    class var overridedableComutedTypeProperty : Int&#123;</span><br><span class="line">        return 100</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>####5.2获取和设置类型属性的值<br>跟实例的属性一样，类型属性可以用点语法来访问，只是不需要通过实例。</p>
+
+    
+  </div>
+
+  
+      <div class="git"></div>
+  
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持cornerant</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/08/11/iOS10适配的小资料/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/08/13/Swift-闭包/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

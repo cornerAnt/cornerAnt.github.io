@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Swift-闭包 | Cornerant Zone</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Swift," />
+  
+
+  <meta name="description" content="闭包是自包含的函数代码块,可以被传递和使用,类似OC中的代码块。闭包可以捕获和存储其所在上下文中任意的常量和变量的引用，就是所谓的闭合并包裹着这些常量和变量。  全局函数和嵌套函数也是特殊的闭包，闭包常见的有三种 1.全局函数是有名字，不能捕获任何值的闭包 2.嵌套函数是有名字，可以捕获封闭函数域范围内的闭包 3.闭包表达式没有名字，可以捕获对应上下文中变量或者常量。   闭包可以通过语法优化，拥">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-闭包">
+<meta property="og:url" content="http://www.antjustgo.com/2016/08/13/Swift-闭包/index.html">
+<meta property="og:site_name" content="Cornerant Zone">
+<meta property="og:description" content="闭包是自包含的函数代码块,可以被传递和使用,类似OC中的代码块。闭包可以捕获和存储其所在上下文中任意的常量和变量的引用，就是所谓的闭合并包裹着这些常量和变量。  全局函数和嵌套函数也是特殊的闭包，闭包常见的有三种 1.全局函数是有名字，不能捕获任何值的闭包 2.嵌套函数是有名字，可以捕获封闭函数域范围内的闭包 3.闭包表达式没有名字，可以捕获对应上下文中变量或者常量。   闭包可以通过语法优化，拥">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-09T07:09:21.743Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-闭包">
+<meta name="twitter:description" content="闭包是自包含的函数代码块,可以被传递和使用,类似OC中的代码块。闭包可以捕获和存储其所在上下文中任意的常量和变量的引用，就是所谓的闭合并包裹着这些常量和变量。  全局函数和嵌套函数也是特殊的闭包，闭包常见的有三种 1.全局函数是有名字，不能捕获任何值的闭包 2.嵌套函数是有名字，可以捕获封闭函数域范围内的闭包 3.闭包表达式没有名字，可以捕获对应上下文中变量或者常量。   闭包可以通过语法优化，拥">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Swift-闭包" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Swift-闭包</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.08.13</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>cornerant</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>闭包是自包含的函数代码块,可以被传递和使用,类似OC中的代码块。闭包可以捕获和存储其所在上下文中任意的常量和变量的引用，就是所谓的闭合并包裹着这些常量和变量。</p>
+<ul>
+<li>全局函数和嵌套函数也是特殊的闭包，闭包常见的有三种<ul>
+<li>1.全局函数是有名字，不能捕获任何值的闭包</li>
+<li>2.嵌套函数是有名字，可以捕获封闭函数域范围内的闭包</li>
+<li>3.闭包表达式没有名字，可以捕获对应上下文中变量或者常量。</li>
+</ul>
+</li>
+<li>闭包可以通过语法优化，拥有一个简洁的风格<ul>
+<li>1.利用上下文推断参数和返回值类型</li>
+<li>2.隐式返回单表达式闭包，可以省略return关键字</li>
+<li>3.参数名称缩写</li>
+<li>4.尾随闭包语法</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>##1.闭包表达式<br>闭包表达式是一种利用简洁语法构建内联包的方式。下面通过多次迭代优化来简化闭包表达式</p>
+<p>#####1.1sort方法<br>Swift的sort方法可以用来怼数组进行排序，返回一个与原大小数组大小相同，正确排序的新数组，原数组不会被修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let names = [&quot;zhangsang&quot;,&quot;lisi&quot;,&quot;wangwu&quot;,&quot;zhaoliu&quot;]</span><br><span class="line"></span><br><span class="line">// sort方法接受一个闭包，该闭包函数需要传入与数组元素相同的连个值，根据布尔值，来选择排序顺序.</span><br><span class="line">// 类型为(String, String) -&gt; Bool</span><br><span class="line"></span><br><span class="line">// 写一个符合该类型的闭包函数，按照逆序排列数组</span><br><span class="line">func backwards(s1: String, s2: String) -&gt; Bool&#123;</span><br><span class="line">    </span><br><span class="line">    return s1 &gt; s2</span><br><span class="line">&#125;</span><br><span class="line">var reversed = names.sort(backwards)</span><br><span class="line">// 排序完的数组如下</span><br><span class="line">[&quot;zhaoliu&quot;，&quot;zhangsang&quot;,&quot;wangwu&quot;,&quot;lisi&quot;]</span><br></pre></td></tr></table></figure>
+<p>####1.2闭包表达式语法<br>闭包表达式的一般形式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;(参数)-&gt; 返回值 in</span><br><span class="line">	 闭包语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>闭包表达式的参数</p>
+<ul>
+<li><p>常量、变量、inout类型，不可提供默认值</p>
+</li>
+<li><p>可在参数列表的后面使用可变参数</p>
+</li>
+<li><p>元祖可以作为参数和返回值</p>
+</li>
+<li><p>内联闭包参数和返回值类型声明与backwards函数类型声明相同，两种都可以写为(s1: String, s2: String) -&gt; Bool</p>
+</li>
+<li><p>内联闭包表达式中，函数和返回值都写在大括号内</p>
+</li>
+<li><p>函数的关键部分通过in引入。in前面是闭包的参数和返回值，in后面为闭包函数体<br>-</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversed = names.<span class="built_in">sort</span>(&#123;(s1: <span class="type">String</span>, s2: <span class="type">String</span>) -&gt; <span class="type">Bool</span> <span class="keyword">in</span> <span class="keyword">return</span> s1 &gt; s2 &#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上述代码完全可以写在一行，这样闭包也就变成了内联闭包</p>
+<p>####1.3根据上下文推断类型</p>
+<ul>
+<li><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversed = names.<span class="built_in">sort</span>（&#123;(s1: <span class="type">String</span>, s2: <span class="type">String</span>) -&gt; <span class="type">Bool</span> <span class="keyword">in</span> <span class="keyword">return</span> s1 &gt; s2 &#125;）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>该闭包是sort方法的参数，由于该方法的参数必然为（String,String）-&gt;Bool 类型的函数，这就意味着闭包的参数和返回值不需要特别指出，Swift可以自动推断出正确的类型。那么，参数和返回值可以继续简写</p>
+</li>
+<li><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversed = names.<span class="built_in">sort</span>（&#123;s1, s2 <span class="keyword">in</span> <span class="keyword">return</span> s1 &gt; s2 &#125;）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过内联表达式构造的闭包作为参数传递给函数或者方法时，都可以正确的推倒出闭包的参数和返回值</p>
+</li>
+<li><p>当闭包作为函数或者方法的参数时，不需要完整格式的闭包表达</p>
+</li>
+<li><p>为了代码的可读性，适度的选择简写</p>
+</li>
+</ul>
+<p>####1.4单表达式闭包隐式返回</p>
+<ul>
+<li>单行表达式闭包可以省略return来隐式地返回当行表达式的结果，sort方法的第二个参数表示，闭包必须返回一个Bool值，由于该闭包只有一个单一表达式 s1 &gt; s2,而且返回Bool类型，所以下面的简写不会有歧义：<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversed = names.<span class="built_in">sort</span>（&#123;s1, s2 <span class="keyword">in</span>  s1 &gt; s2 &#125;）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>####1.5参数名称缩写</p>
+<ul>
+<li><p>Swift系统为内联闭包提供参数缩写功能，通过$0,$1,$2来顺序调用闭包的参数</p>
+</li>
+<li><p>通过参数名称缩写，可以在闭包参数列表中，省略相应参数的定义</p>
+</li>
+<li><p>通过参数名称缩写，相应参数的类型会进行类型推断</p>
+</li>
+<li><p>in也能被省略</p>
+</li>
+<li><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversed = names.<span class="built_in">sort</span>（&#123; $<span class="number">0</span> &gt; $<span class="number">1</span> &#125;）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>####1.6运算函数</p>
+<ul>
+<li>Swift的Sring类型，(&gt;)接受两个String类型的参数，返回Bool值。这样的类型刚好匹配Sort方法所需的参数类型，因此可以进一步简写</li>
+<li><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversed = names.<span class="built_in">sort</span>（&gt;）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>##2.尾随闭包</p>
+<ul>
+<li><p>当一个很长的闭包表达式作为最后一个参数传递个函数时，可以使用尾随闭包来增强函数的可读性</p>
+</li>
+<li><p>尾随闭包是一个写在函数括号之后的闭包表达式，函数支持它作为最后一个参数调用</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个普通的函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">oneFunction</span><span class="params">( closure:<span class="params">()</span></span></span>-&gt;<span class="type">Void</span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不用尾随闭包调用</span></span><br><span class="line">oneFunction &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 闭包内容</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用尾随闭包调用</span></span><br><span class="line">oneFunction()&#123;</span><br><span class="line">    <span class="comment">// 闭包内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>上面关于排序的闭包也写简写</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversed = names.<span class="built_in">sort</span>（）&#123; $<span class="number">1</span> &gt; $<span class="number">2</span> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果函数只需要一个闭包作为参数，尾随闭包可以省略括号</p>
+</li>
+<li><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversed = names.<span class="built_in">sort</span>&#123; $<span class="number">1</span> &gt; $<span class="number">2</span> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Array有个map(_:)方法，只接受一个闭包作为参数，该方法会返回一个新的数组，数组中的元素与原数组一一映射</p>
+</li>
+<li><p>下面通过该方法，使用尾随闭包，讲Int类型数组[16,58,510]转换为对应的String类型的数组[“OneSix”,”FiveEight”,”FiveOneZero”]<br>-</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> digitNames = [</span><br><span class="line">    <span class="number">0</span>: <span class="string">"Zero"</span>, <span class="number">1</span>: <span class="string">"One"</span>, <span class="number">2</span>: <span class="string">"Two"</span>,   <span class="number">3</span>: <span class="string">"Three"</span>, <span class="number">4</span>: <span class="string">"Four"</span>,</span><br><span class="line">    <span class="number">5</span>: <span class="string">"Five"</span>, <span class="number">6</span>: <span class="string">"Six"</span>, <span class="number">7</span>: <span class="string">"Seven"</span>, <span class="number">8</span>: <span class="string">"Eight"</span>, <span class="number">9</span>: <span class="string">"Nine"</span></span><br><span class="line">]</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">16</span>, <span class="number">58</span>, <span class="number">510</span>]</span><br><span class="line"><span class="comment">//  目标字符串</span></span><br><span class="line"><span class="keyword">let</span> strings = numbers.<span class="built_in">map</span> &#123; (<span class="keyword">var</span> number) -&gt; <span class="type">String</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">var</span> output = <span class="string">""</span></span><br><span class="line">    <span class="keyword">while</span> number &gt; <span class="number">0</span> &#123;</span><br><span class="line">        output = digitNames[number % <span class="number">10</span>]! + output</span><br><span class="line">        number /= <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> output</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上述过程，闭包参数number被声明为一个可变参数，因此可以在闭包函数体中修改。</p>
+</li>
+<li><p>闭包表达式指定了返回类型为String</p>
+</li>
+<li><p>闭包表达式每次被调用时，创建一个Output的字符串并且返回</p>
+</li>
+<li><p>从digitNames字典中取出的字符串被拼接早output的前段，逆序简历了一个字符串版本的数字</p>
+</li>
+<li><p>当number /= 10 为0时，out字符串被返回</p>
+</li>
+<li><p>map方法讲字符串添加到所映射的数组中</p>
+</li>
+<li><p>尾随闭包让代码变得更优雅</p>
+</li>
+</ul>
+<hr>
+<p>##3.捕获值</p>
+<ul>
+<li>闭包在其对应的上下文中捕获常量或者变量，即使被捕获的常量或者变量作用域已经不在，闭包仍然可以正确地引用和修改这些值。</li>
+</ul>
+<ul>
+<li>嵌套函数是最简单的可以捕获值的闭包，捕获范围是其外部函数范围</li>
+</ul>
+<p>下面举个例子来说明：</p>
+<ul>
+<li><p>makeIncrementor函数包含一个incrementor的嵌套函数，incrementor从上下文中捕获了两个值，一个amount，一个runningTotal</p>
+</li>
+<li><p>成功捕获该值后，makeIncrementor将incrementor作为闭包返回</p>
+</li>
+<li><p>每次调用incrementor时，runningTotal会增加amount</p>
+</li>
+<li><p>makeIncrementor函数的返回值是一个无参数返回值为Int的函数,() -&gt;Int</p>
+</li>
+<li><p>makeIncrementor有一个runningTotal的初始值，该值通过incrementor函数返回</p>
+</li>
+<li><p>makeIncrementor函数有个Int类型的参数，其外部参数为forIncrement，内部参数为amount</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">makeIncrementor</span><span class="params">(forIncrement amount: Int)</span></span> -&gt; () -&gt;<span class="type">Int</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> runningTotal = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span>  <span class="title">incrementor</span><span class="params">()</span></span> -&gt; <span class="type">Int</span>&#123;</span><br><span class="line"></span><br><span class="line">        runningTotal += amount</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> runningTotal</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> incrementor</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>incrementor函数没用参数，但是捕获了amount，runningTotal两个参数，并且可以进行正确的修改</p>
+</li>
+<li><p>注意：</p>
+<ul>
+<li>当一个值步变的时候，Swift可能会改为捕获并且保存一份对值的拷贝</li>
+<li>Swift会自我管理捕获变量的内存</li>
+</ul>
+</li>
+<li><p>下面，来调用上面的函数</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">let</span> run = makeIncrementor(forIncrement: <span class="number">5</span>)</span><br><span class="line">run() <span class="comment">// 5</span></span><br><span class="line">run() <span class="comment">// 10</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">let</span> run2 = makeIncrementor(forIncrement: <span class="number">7</span>)</span><br><span class="line">run2() <span class="comment">// 7</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">run() <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当创建incrementor时，会得到了个独立全新的变量，因此上述run1,run互不干扰</p>
+</li>
+</ul>
+<hr>
+<p>##4.闭包是引用类型</p>
+<ul>
+<li><p>上面的例子，run,run1都是常量，但是这些常量指向的闭包依然可以增加其捕获变量的值，因为闭包是引用类型</p>
+</li>
+<li><p>将一个函数或者闭包赋值给一个常量或者变量，实际都是讲常量或者变量的值设置为对应函数或者闭包的引用</p>
+</li>
+<li><p>将闭包赋值给两个不同的变量或者常量，两个值都会指向一个闭包</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> run3 = run</span><br><span class="line">run3() <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
+<p>##5.非逃逸闭包</p>
+<p>####5.1什么是非逃逸闭包</p>
+<ul>
+<li><p>当一个闭包作为参数传递给函数时，如果闭包在函数返回之后才执行，则成这样的闭包从函数中逃逸</p>
+</li>
+<li><p>当定义接受闭包作为参数的函数时，可以在参数前面添加@noescape，用来表示该闭包是不可以逃逸的</p>
+</li>
+<li><p>闭包标注@noescape后，闭包只能在函数体中执行，不能脱离函数体</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非逃逸闭包</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">someFunction</span><span class="params">(@noescape closure: <span class="params">()</span></span></span>-&gt;<span class="type">Void</span>)&#123;</span><br><span class="line">    closure()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sort方法就可以用非逃逸闭包，因为它在排序完成的时候，就已经没用了</p>
+</li>
+<li>常用的闭包往往都是逃逸的，比如网络异步请求后，我们获得返回数据使用，这些闭包要脱离函数体使用</li>
+</ul>
+
+    
+  </div>
+
+  
+      <div class="git"></div>
+  
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持cornerant</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/08/11/Swift-存储属性与计算属性/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/09/13/Swift-如何配置DEBUG打印函数/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

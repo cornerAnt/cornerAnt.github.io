@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>GCD在Swift3-0的改变 | Cornerant Zone</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Swift," />
+  
+
+  <meta name="description" content="在iOS中,苹果提供了两种方式进行多任务编程：Grand Central Dispatch (GCD) 和 NSOperationQueue。本文主要介绍GCD在Swift3.0的改变,无论那种方式实现多线程,都是为了不堵塞主线程,高效的利用CPU,以便于任何操作都不能堵塞主线程，必须使其用于界面响应以及用户交互。 Swift3.0重新写GCD语法和风格,在介绍新GCD前,先了解两个重要的概念.">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GCD在Swift3-0的改变">
+<meta property="og:url" content="http://www.antjustgo.com/2016/03/11/GCD在Swift3-0的改变/index.html">
+<meta property="og:site_name" content="Cornerant Zone">
+<meta property="og:description" content="在iOS中,苹果提供了两种方式进行多任务编程：Grand Central Dispatch (GCD) 和 NSOperationQueue。本文主要介绍GCD在Swift3.0的改变,无论那种方式实现多线程,都是为了不堵塞主线程,高效的利用CPU,以便于任何操作都不能堵塞主线程，必须使其用于界面响应以及用户交互。 Swift3.0重新写GCD语法和风格,在介绍新GCD前,先了解两个重要的概念.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-09T07:06:59.659Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GCD在Swift3-0的改变">
+<meta name="twitter:description" content="在iOS中,苹果提供了两种方式进行多任务编程：Grand Central Dispatch (GCD) 和 NSOperationQueue。本文主要介绍GCD在Swift3.0的改变,无论那种方式实现多线程,都是为了不堵塞主线程,高效的利用CPU,以便于任何操作都不能堵塞主线程，必须使其用于界面响应以及用户交互。 Swift3.0重新写GCD语法和风格,在介绍新GCD前,先了解两个重要的概念.">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-重新认识-Dispatch-Queue"><span class="toc-text">1.重新认识 Dispatch Queue</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-GCD在Swift3-0的改变" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">GCD在Swift3-0的改变</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.03.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>cornerant</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <ul>
+<li>在iOS中,苹果提供了两种方式进行多任务编程：Grand Central Dispatch (GCD) 和 NSOperationQueue。本文主要介绍GCD在Swift3.0的改变,无论那种方式实现多线程,都是为了不堵塞主线程,高效的利用CPU,以便于任何操作都不能堵塞主线程，必须使其用于界面响应以及用户交互。</li>
+<li>Swift3.0重新写GCD语法和风格,在介绍新GCD前,先了解两个重要的概念.<ul>
+<li>1.队列( dispatch queue):<br> 一个队列实际上就是一系列的代码块，这些代码可以在主线程或后台线程中以同步或者异步的方式执行。一旦队列创建完成，操作系统就接管了这个队列，并将其分配到任意一个核心中进行处理。不管有多少个队列，它们都能被系统正确地管理，这些都不需要开发者进行手动管理。队列遵循 FIFO 模式（先进先出），这意味着先进队列的任务会先被执行（比如上厕所的时候,排队,里面的人上完,下一个人才能继续）。</li>
+<li>2.任务项(WorkItem):<br>一个任务项就是一个代码块，它可以随同队列的创建一起被创建，也可以被封装起来，然后在之后的代码中进行复用。正如你所想，任务项的代码就是 dispatch queue 将会执行的代码。队列中的任务项也是遵循 FIFO 模式。这些执行可以是同步的，也可以是异步的。对于同步的情况下，应用会一直堵塞当前线程，直到这段代码执行完成。而当异步执行的时候，应用先执行任务项，不等待执行结束，立即返回。</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-重新认识-Dispatch-Queue"><a href="#1-重新认识-Dispatch-Queue" class="headerlink" title="1.重新认识 Dispatch Queue"></a>1.重新认识 Dispatch Queue</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let queue = DispatchQueue(label: &quot;myQueue&quot;)</span><br></pre></td></tr></table></figure>
+<p>同步和异步执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   queue.sync &#123;</span><br><span class="line">print(&quot;同步执行&quot;)</span><br><span class="line"> &#125;</span><br><span class="line">    queue.async &#123;</span><br><span class="line">print(&quot;异步执行&quot;)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>#2.Quality Of Service（QoS）和优先级</p>
+<ul>
+<li>用于指定任务重要程度以及优先级的信息，在 GCD 中被称为 Quality of Service（QoS）</li>
+</ul>
+<ul>
+<li>userInteractive</li>
+<li>userInitiated</li>
+<li>default</li>
+<li>utility</li>
+<li>background</li>
+<li>unspecified</li>
+</ul>
+<p>优先级,通过下面方法的qos参数设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let queue1 = DispatchQueue(label: &quot;queue1&quot;, qos: DispatchQoS.background)</span><br></pre></td></tr></table></figure></p>
+<p>#3.串行与并行</p>
+<ul>
+<li>默认情况下,任务在一个队列中都是串行进行的,有时候我们需要并行队列,则通过设置attributes参数来实现,当这个参数被指定为 concurrent<br>时，该特定队列中的所有任务都会被同时执行。如果没有指定这个参数，则队列会被设置为串行队列。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let queue2 = DispatchQueue(label: &quot;queue2&quot;, qos: .utility, attributes: .concurrent)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意:attributes也可以接受另一个名为 initiallyInactive<br>的值。如果使用这个值，任务不会被自动执行，而是需要开发者手动去触发。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var inactiveQueue: DispatchQueue!</span><br><span class="line"></span><br><span class="line">现在，初始化队列，并将其赋值给 inactiveQueue</span><br><span class="line">：</span><br><span class="line">let queue3 = DispatchQueue(label: &quot;queue3&quot;, qos: .utility, attributes: .initiallyInactive)inactiveQueue = anotherQueue</span><br><span class="line"></span><br><span class="line">使用成员属性是有必要的，因为 anotherQueue</span><br><span class="line"> 是在 concurrentQueues()</span><br><span class="line"></span><br><span class="line">if let queue = inactiveQueue &#123; </span><br><span class="line">   queue.activate()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>但是代码依然是串行进行的,如果还要并行执行任务,可以指定attributes参数接受一个数组: [.concurrent, .initiallyInactive]</li>
+</ul>
+<p>#4.延时执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let queue4 = DispatchQueue(label: &quot;queue4&quot;, qos: .userInitiated)</span><br><span class="line">print(Date())</span><br><span class="line">let additionalTime: DispatchTimeInterval = .seconds(2)</span><br><span class="line">delayQueue.asyncAfter(deadline: .now() + 0.75) &#123; </span><br><span class="line">print(Date())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#5.访问主队列和全局队列</p>
+<ul>
+<li>和之前的GCD写法类型,Swift3.0依然提供了快速访问队列的方式.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let globalQueue = DispatchQueue.global()</span><br><span class="line">  globalQueue.async &#123;        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>全局队列依然可以设置优先级,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let globalQueue = DispatchQueue.global(qos: .userInitiated)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>最常用的就是更新UI的操作,都要回到主队列</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DispatchQueue.main.async &#123; </span><br><span class="line">// Do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#6.DispatchWorkItem 对象<br>DispatchWorkItem简单的来描述就是一个代码块可以在任意一个队列上被调用.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let workItem = DispatchWorkItem &#123; </span><br><span class="line">// Do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在全局队列上调用代码块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let queue = DispatchQueue.global()queue.async &#123; </span><br><span class="line">   workItem.perform()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>DispatchQueue 类为此目的提供了一个便利的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">queue.async(execute: workItem)</span><br></pre></td></tr></table></figure>
+<p>当任务执行完毕的时候,可以通知主队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">workItem.notify(queue: DispatchQueue.main) &#123; </span><br><span class="line">print(&quot;value = &quot;, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Swift3.0 GCD的写法变了很多,更加的间接和清晰了.</p>
+
+    
+  </div>
+
+  
+      <div class="git"></div>
+  
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持cornerant</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/02/11/SDWebImage内部实现过程/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/04/19/cell展开功能的实现/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

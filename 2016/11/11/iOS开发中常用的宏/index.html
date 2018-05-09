@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS开发的常用宏 | Cornerant Zone</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="iOS," />
+  
+
+  <meta name="description" content="快速开发中常用的宏12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发的常用宏">
+<meta property="og:url" content="http://www.antjustgo.com/2016/11/11/iOS开发中常用的宏/index.html">
+<meta property="og:site_name" content="Cornerant Zone">
+<meta property="og:description" content="快速开发中常用的宏12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-09T07:08:01.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发的常用宏">
+<meta name="twitter:description" content="快速开发中常用的宏12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-iOS开发中常用的宏" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">iOS开发的常用宏</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.11.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>cornerant</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>快速开发中常用的宏<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#ifndef MacroDefinition_h</span></span><br><span class="line"><span class="meta">#define MacroDefinition_h</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//-------------------获取设备大小-------------------------</span></span><br><span class="line"><span class="comment">//NavBar高度</span></span><br><span class="line"><span class="meta">#define NavigationBar_HEIGHT 44</span></span><br><span class="line"><span class="comment">//获取屏幕 宽度、高度</span></span><br><span class="line"><span class="meta">#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)</span></span><br><span class="line"><span class="meta">#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//-------------------获取设备大小-------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//-------------------打印日志-------------------------</span></span><br><span class="line"><span class="comment">//DEBUG  模式下打印日志,当前行</span></span><br><span class="line"><span class="meta">#ifdef DEBUG</span></span><br><span class="line"><span class="meta">#   define DLog(fmt, ...) NSLog((@<span class="meta-string">"%s [Line %d] "</span> fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);</span></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="meta">#   define DLog(...)</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//重写NSLog,Debug模式下打印日志和当前行数</span></span><br><span class="line"><span class="meta">#if DEBUG</span></span><br><span class="line"><span class="meta">#define NSLog(FORMAT, ...) fprintf(stderr,<span class="meta-string">"\nfunction:%s line:%d content:%s\n"</span>, __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);</span></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="meta">#define NSLog(FORMAT, ...) nil</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//DEBUG  模式下打印日志,当前行 并弹出一个警告</span></span><br><span class="line"><span class="meta">#ifdef DEBUG</span></span><br><span class="line"><span class="meta">#   define ULog(fmt, ...)  &#123; UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@<span class="meta-string">"%s\n [Line %d] "</span>, __PRETTY_FUNCTION__, __LINE__] message:[NSString stringWithFormat:fmt, ##__VA_ARGS__]  delegate:nil cancelButtonTitle:@<span class="meta-string">"Ok"</span> otherButtonTitles:nil]; [alert show]; &#125;</span></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="meta">#   define ULog(...)</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#define ITTDEBUG</span></span><br><span class="line"><span class="meta">#define ITTLOGLEVEL_INFO     10</span></span><br><span class="line"><span class="meta">#define ITTLOGLEVEL_WARNING  3</span></span><br><span class="line"><span class="meta">#define ITTLOGLEVEL_ERROR    1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#ifndef ITTMAXLOGLEVEL</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#ifdef DEBUG</span></span><br><span class="line"><span class="meta">#define ITTMAXLOGLEVEL ITTLOGLEVEL_INFO</span></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="meta">#define ITTMAXLOGLEVEL ITTLOGLEVEL_ERROR</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The general purpose logger. This ignores logging levels.</span></span><br><span class="line"><span class="meta">#ifdef ITTDEBUG</span></span><br><span class="line"><span class="meta">#define ITTDPRINT(xx, ...)  NSLog(@<span class="meta-string">"%s(%d): "</span> xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#else</span></span><br><span class="line"><span class="meta">#define ITTDPRINT(xx, ...)  ((void)0)</span></span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Prints the current method's name.</span></span><br><span class="line"><span class="meta">#define ITTDPRINTMETHODNAME() ITTDPRINT(@<span class="meta-string">"%s"</span>, __PRETTY_FUNCTION__)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Log-level based logging macros.</span></span><br><span class="line"><span class="meta">#if ITTLOGLEVEL_ERROR <span class="meta-string">&lt;= ITTMAXLOGLEVEL</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTDERROR(xx, ...)  ITTDPRINT(xx, ##__VA_ARGS__)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#else</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTDERROR(xx, ...)  ((void)0)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#endif</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#if ITTLOGLEVEL_WARNING &lt;= ITTMAXLOGLEVEL</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTDWARNING(xx, ...)  ITTDPRINT(xx, ##__VA_ARGS__)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#else</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTDWARNING(xx, ...)  ((void)0)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#endif</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#if ITTLOGLEVEL_INFO &lt;= ITTMAXLOGLEVEL</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTDINFO(xx, ...)  ITTDPRINT(xx, ##__VA_ARGS__)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#else</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTDINFO(xx, ...)  ((void)0)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#endif</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#ifdef ITTDEBUG</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTDCONDITIONLOG(condition, xx, ...) &#123; if ((condition)) &#123; \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">ITTDPRINT(xx, ##__VA_ARGS__); \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125; \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125; ((void)0)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#else</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTDCONDITIONLOG(condition, xx, ...) ((void)0)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#endif</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ITTAssert(condition, ...)                                       \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">do &#123;                                                                      \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">if (!(condition)) &#123;                                                     \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">[[NSAssertionHandler currentHandler]                                  \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">file:[NSString stringWithUTF8String:__FILE__]  \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">lineNumber:__LINE__                                  \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">description:__VA_ARGS__];                             \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;                                                                       \</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125; while(0)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//---------------------打印日志--------------------------</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//----------------------系统----------------------------</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//获取系统版本</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define CurrentSystemVersion [[UIDevice currentDevice] systemVersion]</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//获取当前语言</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//判断是否 Retina屏、设备是否%fhone 5、是否是iPad</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define isRetina ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//判断是真机还是模拟器</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#if TARGET_OS_IPHONE</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//iPhone Device</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#endif</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#if TARGET_IPHONE_SIMULATOR</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//iPhone Simulator</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#endif</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//检查系统版本</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//----------------------系统----------------------------</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//----------------------内存----------------------------</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//使用ARC和不使用ARC</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#if __has_feature(objc_arc)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//compiling with ARC</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#else</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// compiling without ARC</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#endif</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#pragma mark - common functions</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define RELEASE_SAFELY(__POINTER) &#123; [__POINTER release]; __POINTER = nil; &#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//释放一个对象</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define SAFE_DELETE(P) if(P) &#123; [P release], P = nil; &#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define SAFE_RELEASE(x) [x release];x=nil</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//----------------------内存----------------------------</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//----------------------图片----------------------------</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//读取本地图片</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define LOADIMAGE(file,ext) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:file ofType:ext]]</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//定义UIImage对象</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define IMAGE(A) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:A ofType:nil]]</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//定义UIImage对象</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">#define ImageNamed(_pointer) [UIImage imageNamed:[UIUtil imageName:_pointer]]</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//建议使用前两种宏定义,性能高于后者</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//----------------------图片----------------------------</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">//----------------------颜色类---------------------------</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// rgb颜色转换（16进制-&gt;</span>10进制）</span></span><br><span class="line"><span class="meta">#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue &amp; 0xFF0000) &gt;&gt; 16))/255.0 green:((float)((rgbValue &amp; 0xFF00) &gt;&gt; 8))/255.0 blue:((float)(rgbValue &amp; 0xFF))/255.0 alpha:1.0]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//带有RGBA的颜色设置</span></span><br><span class="line"><span class="meta">#define COLOR(R, G, B, A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取RGB颜色</span></span><br><span class="line"><span class="meta">#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]</span></span><br><span class="line"><span class="meta">#define RGB(r,g,b) RGBA(r,g,b,1.0f)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//背景色</span></span><br><span class="line"><span class="meta">#define BACKGROUND_COLOR [UIColor colorWithRed:242.0/255.0 green:236.0/255.0 blue:231.0/255.0 alpha:1.0]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//清除背景色</span></span><br><span class="line"><span class="meta">#define CLEARCOLOR [UIColor clearColor]</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - color functions</span></span><br><span class="line"><span class="meta">#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]</span></span><br><span class="line"><span class="meta">#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//----------------------颜色类--------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//----------------------其他----------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方正黑体简体字体定义</span></span><br><span class="line"><span class="meta">#define FONT(F) [UIFont fontWithName:@<span class="meta-string">"FZHTJW--GB1-0"</span> size:F]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个API</span></span><br><span class="line"><span class="meta">#define APIURL                @<span class="meta-string">"http://xxxxx/"</span></span></span><br><span class="line"><span class="comment">//登陆API</span></span><br><span class="line"><span class="meta">#define APILogin              [APIURL stringByAppendingString:@<span class="meta-string">"Login"</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//设置View的tag属性</span></span><br><span class="line"><span class="meta">#define VIEWWITHTAG(_OBJECT, _TAG)    [_OBJECT viewWithTag : _TAG]</span></span><br><span class="line"><span class="comment">//程序的本地化,引用国际化的文件</span></span><br><span class="line"><span class="meta">#define MyLocal(x, ...) NSLocalizedString(x, nil)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//G－C－D</span></span><br><span class="line"><span class="meta">#define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)</span></span><br><span class="line"><span class="meta">#define MAIN(block) dispatch_async(dispatch_get_main_queue(),block)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//NSUserDefaults 实例化</span></span><br><span class="line"><span class="meta">#define USER_DEFAULT [NSUserDefaults standardUserDefaults]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//由角度获取弧度 有弧度获取角度</span></span><br><span class="line"><span class="meta">#define degreesToRadian(x) (M_PI * (x) / 180.0)</span></span><br><span class="line"><span class="meta">#define radianToDegrees(radian) (radian*180.0)/(M_PI)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//单例化一个类</span></span><br><span class="line"><span class="meta">#define SYNTHESIZE_SINGLETON_FOR_CLASS(classname) \</span></span><br><span class="line">\</span><br><span class="line"><span class="keyword">static</span> classname *shared<span class="meta">##classname = nil; \</span></span><br><span class="line">\</span><br><span class="line">+ (classname *)shared<span class="meta">##classname \</span></span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">@synchronized</span>(<span class="keyword">self</span>) \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">if</span> (shared<span class="meta">##classname == nil) \</span></span><br><span class="line">&#123; \</span><br><span class="line">shared<span class="meta">##classname = [[self alloc] init]; \</span></span><br><span class="line">&#125; \</span><br><span class="line">&#125; \</span><br><span class="line">\</span><br><span class="line"><span class="keyword">return</span> shared<span class="meta">##classname; \</span></span><br><span class="line">&#125; \</span><br><span class="line">\</span><br><span class="line">+ (<span class="keyword">id</span>)allocWithZone:(<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">@synchronized</span>(<span class="keyword">self</span>) \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">if</span> (shared<span class="meta">##classname == nil) \</span></span><br><span class="line">&#123; \</span><br><span class="line">shared<span class="meta">##classname = [super allocWithZone:zone]; \</span></span><br><span class="line"><span class="keyword">return</span> shared<span class="meta">##classname; \</span></span><br><span class="line">&#125; \</span><br><span class="line">&#125; \</span><br><span class="line">\</span><br><span class="line"><span class="keyword">return</span> <span class="literal">nil</span>; \</span><br><span class="line">&#125; \</span><br><span class="line">\</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>; \</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#endif</span></span><br></pre></td></tr></table></figure></p>
+
+    
+  </div>
+
+  
+      <div class="git"></div>
+  
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持cornerant</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/10/19/Swift小技巧/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/03/08/第三方资源收集/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

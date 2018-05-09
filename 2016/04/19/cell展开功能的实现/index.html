@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>cell展开功能的实现 | Cornerant Zone</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="iOS," />
+  
+
+  <meta name="description" content="仿写一个类似QQ分组的展开效果,分析下该效果的结构.根据点击了组的头部视图,判断是否要展开该组.可以理解为点击了每组的头部视图后,动态的改变了每个cell的高度. 本代码这是为了实习小功能的Demo,并未对其进行很好的封装,只为举个例子.下面贴出代码进行分析  1234567891011121314151617181920212223242526272829303132333435363738">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cell展开功能的实现">
+<meta property="og:url" content="http://www.antjustgo.com/2016/04/19/cell展开功能的实现/index.html">
+<meta property="og:site_name" content="Cornerant Zone">
+<meta property="og:description" content="仿写一个类似QQ分组的展开效果,分析下该效果的结构.根据点击了组的头部视图,判断是否要展开该组.可以理解为点击了每组的头部视图后,动态的改变了每个cell的高度. 本代码这是为了实习小功能的Demo,并未对其进行很好的封装,只为举个例子.下面贴出代码进行分析  1234567891011121314151617181920212223242526272829303132333435363738">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1050644-1e9a3e4339cfcaec.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-05-09T07:06:33.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cell展开功能的实现">
+<meta name="twitter:description" content="仿写一个类似QQ分组的展开效果,分析下该效果的结构.根据点击了组的头部视图,判断是否要展开该组.可以理解为点击了每组的头部视图后,动态的改变了每个cell的高度. 本代码这是为了实习小功能的Demo,并未对其进行很好的封装,只为举个例子.下面贴出代码进行分析  1234567891011121314151617181920212223242526272829303132333435363738">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1050644-1e9a3e4339cfcaec.gif?imageMogr2/auto-orient/strip">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-cell展开功能的实现" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">cell展开功能的实现</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.04.19</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>cornerant</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><img src="http://upload-images.jianshu.io/upload_images/1050644-1e9a3e4339cfcaec.gif?imageMogr2/auto-orient/strip" alt="Untitled.gif"></p>
+<ul>
+<li>仿写一个类似QQ分组的展开效果,分析下该效果的结构.根据点击了组的头部视图,判断是否要展开该组.可以理解为点击了每组的头部视图后,动态的改变了每个cell的高度.</li>
+<li>本代码这是为了实习小功能的Demo,并未对其进行很好的封装,只为举个例子.下面贴出代码进行分析</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 组数据 */</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span> ,<span class="keyword">strong</span>) <span class="built_in">NSArray</span> *sectionArray;;</span><br><span class="line"><span class="comment">/** 行数据 */</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span> ,<span class="keyword">strong</span>) <span class="built_in">NSArray</span> *rowArray;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span> ,<span class="keyword">weak</span>)   <span class="built_in">UITableView</span> *tableView;</span><br><span class="line"><span class="comment">/** 判断cell是否展开 */</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span> ,<span class="keyword">strong</span>) <span class="built_in">NSMutableDictionary</span> *showDic;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span> ,<span class="keyword">weak</span>) <span class="built_in">UILabel</span> *header;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> loadDataSource];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> setupTableView];  </span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)loadDataSource</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span>.sectionArray = @[<span class="string">@"第一组"</span>,<span class="string">@"第二组"</span>,<span class="string">@"第三组"</span>,<span class="string">@"第四组"</span>,<span class="string">@"第五组"</span>,<span class="string">@"第六组"</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span>.rowArray = @[<span class="string">@"张三"</span>,<span class="string">@"李四"</span>,<span class="string">@"王五"</span>,<span class="string">@"赵六"</span>,<span class="string">@"好友"</span>,<span class="string">@"家人"</span>,<span class="string">@"朋友"</span>,<span class="string">@"同学"</span>,<span class="string">@"陌生人"</span>,<span class="string">@"黑名单"</span>,<span class="string">@"好友"</span>,<span class="string">@"家人"</span>,<span class="string">@"朋友"</span>,<span class="string">@"同学"</span>,<span class="string">@"陌生人"</span>,<span class="string">@"黑名单"</span>,<span class="string">@"好友"</span>,<span class="string">@"家人"</span>,<span class="string">@"朋友"</span>,<span class="string">@"同学"</span>,<span class="string">@"陌生人"</span>,<span class="string">@"黑名单"</span>,<span class="string">@"好友"</span>,<span class="string">@"家人"</span>,<span class="string">@"朋友"</span>,<span class="string">@"同学"</span>,<span class="string">@"陌生人"</span>,<span class="string">@"黑名单"</span>];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)setupTableView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UITableView</span> *tableView = [[<span class="built_in">UITableView</span> alloc]initWithFrame:<span class="keyword">self</span>.view.bounds style:<span class="built_in">UITableViewStylePlain</span>];</span><br><span class="line">    <span class="keyword">self</span>.tableView = tableView;</span><br><span class="line">    <span class="keyword">self</span>.tableView.delegate = <span class="keyword">self</span>;</span><br><span class="line">    <span class="keyword">self</span>.tableView.dataSource = <span class="keyword">self</span>;</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span>.tableView registerClass:[<span class="built_in">UITableViewCell</span> <span class="keyword">class</span>] forCellReuseIdentifier:cellID];</span><br><span class="line">    [<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.tableView];</span><br><span class="line">    <span class="keyword">self</span>.tableView.tableFooterView = [[<span class="built_in">UIView</span> alloc]init];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span> *)tableView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">self</span>.sectionArray.count;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.rowArray.count;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;   </span><br><span class="line">    <span class="built_in">UITableViewCell</span> *cell=[tableView dequeueReusableCellWithIdentifier:cellID];</span><br><span class="line">    <span class="comment">// 剪掉超出部分</span></span><br><span class="line">    cell.clipsToBounds = <span class="literal">YES</span>;</span><br><span class="line">  </span><br><span class="line">    cell.textLabel.text = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"第 %ld 行： %@"</span>,indexPath.row,<span class="keyword">self</span>.rowArray[indexPath.row]];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>上面的代码初始化了一些基本数据,下面将为组头部视图,添加监听</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="built_in">UIView</span>*)tableView:(<span class="built_in">UITableView</span> *)tableView viewForHeaderInSection:(<span class="built_in">NSInteger</span>)section&#123;</span><br><span class="line">    <span class="built_in">UILabel</span> *header = [[<span class="built_in">UILabel</span> alloc]init];</span><br><span class="line">    <span class="keyword">self</span>.header = header;</span><br><span class="line">    </span><br><span class="line">    header.userInteractionEnabled = <span class="literal">YES</span>;</span><br><span class="line">    header.text = <span class="keyword">self</span>.sectionArray[section];</span><br><span class="line">    header.userInteractionEnabled = <span class="literal">YES</span>;</span><br><span class="line">    header.backgroundColor = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    header.tag = section;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UITapGestureRecognizer</span> *singleRecognizer = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(SingleTap:)];</span><br><span class="line">    [header addGestureRecognizer:singleRecognizer];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> header;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)SingleTap:(<span class="built_in">UITapGestureRecognizer</span>*)recognizer&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 拿到当前的label</span></span><br><span class="line">    <span class="built_in">NSInteger</span> didSection = recognizer.view.tag;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">self</span>.showDic) &#123; <span class="comment">// 展开字典创建</span></span><br><span class="line">        <span class="keyword">self</span>.showDic = [[<span class="built_in">NSMutableDictionary</span> alloc]init] ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 拿lable的tag作为字典的key</span></span><br><span class="line">    <span class="built_in">NSString</span> *key = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%ld"</span>,recognizer.view.tag];</span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span>.showDic objectForKey:key]) &#123;  <span class="comment">//如果当前字典没有对应的值</span></span><br><span class="line">        [<span class="keyword">self</span>.showDic setObject:<span class="string">@"isOn"</span> forKey:key]; <span class="comment">// 就把当前的key对应的值存起来</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123; <span class="comment">// 如果展开了</span></span><br><span class="line">        [<span class="keyword">self</span>.showDic removeObjectForKey:key];</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="keyword">self</span>.tableView reloadSections:[<span class="built_in">NSIndexSet</span> indexSetWithIndex:didSection] withRowAnimation:<span class="built_in">UITableViewRowAnimationNone</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上述代码实现了,组头部视图正常现实和监听组头部视图的点击,添加了点击手势,只剩下最后一步了,就是动态设置cell的高度</p>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span> *)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath&#123;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span>.showDic objectForKey:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%ld"</span>,indexPath.section]]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">44</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.01</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span> *)tableView heightForHeaderInSection:(<span class="built_in">NSInteger</span>)section&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">35</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上面的代码就是这个效果的核心了,为了现实分割线的效果特地设置Cell不展开时候的高度为0.01,就可以看出明显的分割线了</li>
+<li>注意点:<ul>
+<li>cell.clipsToBounds = YES; 这行代码包装了cell高度为0.01时,文字堆在一期的难看效果.</li>
+<li>UITableViewRowAnimationNone 是默认的没有动画的参数,可以设置其他的动画参数,是刷新列表时候的动画<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UITableViewRowAnimation</span>) &#123;</span><br><span class="line"><span class="built_in">UITableViewRowAnimationFade</span>,   <span class="comment">//淡入淡出</span></span><br><span class="line"><span class="built_in">UITableViewRowAnimationRight</span>,  <span class="comment">//从右滑入         // slide in from right (or out to right)</span></span><br><span class="line"><span class="built_in">UITableViewRowAnimationLeft</span>,   <span class="comment">//从左滑入</span></span><br><span class="line"><span class="built_in">UITableViewRowAnimationTop</span>,     <span class="comment">//从上滑入</span></span><br><span class="line"><span class="built_in">UITableViewRowAnimationBottom</span>,  <span class="comment">//从下滑入</span></span><br><span class="line"><span class="built_in">UITableViewRowAnimationNone</span>,            <span class="comment">// available in iOS 3.0</span></span><br><span class="line"><span class="built_in">UITableViewRowAnimationMiddle</span>,          <span class="comment">// available in iOS 3.2.  attempts to keep cell centered in the space it will/did occupy</span></span><br><span class="line"><span class="built_in">UITableViewRowAnimationAutomatic</span> = <span class="number">100</span>  <span class="comment">// available in iOS 5.0.  chooses an appropriate animation style for you</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+    
+  </div>
+
+  
+      <div class="git"></div>
+  
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持cornerant</div>
+        <ul>
+        
+          <li class="item">
+            <span>微信扫一扫</span>
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <span>支付宝扫一扫</span>
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/03/11/GCD在Swift3-0的改变/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/05/11/Swift-可选类型optionals--try!-try-try/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
